@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nombre": "Muñeco 1",
+    "precio": 20000,
+    "descripcion": "Didáctico para niños",
+    "imagen": "/images/image1.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Muñeco 2",
+    "precio": 30000,
+    "descripcion": "Impreso en 3D",
+    "imagen": "/images/image2.jpg"
+  }
+]
