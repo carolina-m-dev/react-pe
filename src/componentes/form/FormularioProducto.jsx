@@ -24,6 +24,14 @@ function FormularioProducto({
         onChange={manejarCambio}
       />
 
+      <input
+        type="text"
+        name="imagen"
+        placeholder="URL imagen"
+        value={datosForm.imagen}
+        onChange={manejarCambio}
+      />
+
       <button type="submit">
         Guardar
       </button>

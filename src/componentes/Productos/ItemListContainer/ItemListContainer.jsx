@@ -1,61 +1,45 @@
-import { useEffect, useState } from 'react'
-import Item from '../Item/Item'
+import { useEffect, useState } from "react";
 
-function ItemListContainer() {
+import Item from "../Item/Item";
 
-  const [productos, setProductos] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+function ItemListContainer({ productosExtra }) {
+
+  const [productos, setProductos] = useState([]);
 
   useEffect(() => {
 
-    fetch('/data/productos.json')
-
-      .then((response) => {
-
-        if (!response.ok) {
-          throw new Error('Error al cargar productos')
-        }
-
-        return response.json()
-      })
-
+    fetch("/data/productos.json")
+      .then((res) => res.json())
       .then((data) => {
-        setProductos(data)
-      })
+        setProductos(data);
+      });
 
-      .catch((error) => {
-        setError(error.message)
-      })
+  }, []);
 
-      .finally(() => {
-        setLoading(false)
-      })
-
-  }, [])
-
-  if (loading) {
-    return <h2>Cargando productos...</h2>
-  }
-
-  if (error) {
-    return <h2>{error}</h2>
-  }
+  const todosLosProductos = [
+    ...productos,
+    ...productosExtra
+  ];
 
   return (
-    <div  className="productos-container">
+
+    <>
       <h1>Productos</h1>
 
-      {
-        productos.map((producto) => (
+      <div className="productos-container">
+
+        {todosLosProductos.map((producto) => (
+
           <Item
             key={producto.id}
             producto={producto}
           />
-        ))
-      }
-    </div>
-  )
+
+        ))}
+
+      </div>
+    </>
+  );
 }
 
-export default ItemListContainer
+export default ItemListContainer;

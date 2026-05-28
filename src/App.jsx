@@ -1,13 +1,25 @@
 import { Routes, Route } from "react-router-dom";
-
+import { useState } from "react";
 import Layout from "./componentes/layout/Layout";
 import ItemListContainer from "./componentes/Productos/ItemListContainer/ItemListContainer";
 import ProductoDetalle from "./componentes/Productos/ProductoDetalle";
 import FormularioContainer from "./componentes/form/FormularioContainer";
 
 function App() {
+
+  const [productos, setProductos] = useState([]);
+
+  const agregarProducto = (nuevoProducto) => {
+
+    setProductos((prevProductos) => [
+      ...prevProductos,
+      nuevoProducto
+    ]);
+  };
+
   return (
     <Routes>
+
       <Route element={<Layout />}>
 
         <Route
@@ -19,8 +31,13 @@ function App() {
           path="/productos"
           element={
             <>
-              <ItemListContainer />
-              <FormularioContainer />
+              <ItemListContainer
+                productosExtra={productos}
+              />
+
+              <FormularioContainer
+                agregarProducto={agregarProducto}
+              />
             </>
           }
         />
@@ -36,6 +53,7 @@ function App() {
         />
 
       </Route>
+
     </Routes>
   );
 }

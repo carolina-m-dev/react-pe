@@ -1,29 +1,44 @@
-import { useState } from 'react'
-import FormularioProducto from './FormularioProducto'
+import { useState } from "react";
 
-function FormularioContainer() {
+import FormularioProducto from "./FormularioProducto";
+
+function FormularioContainer({ agregarProducto }) {
 
   const [datosForm, setDatosForm] = useState({
-    nombre: '',
-    precio: ''
-  })
+    nombre: "",
+    precio: "",
+    imagen: ""
+  });
 
   const manejarCambio = (e) => {
 
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     setDatosForm({
       ...datosForm,
       [name]: value
-    })
-  }
+    });
+  };
 
   const manejarEnvio = (e) => {
 
-    e.preventDefault()
+    e.preventDefault();
 
-    console.log(datosForm)
-  }
+    const nuevoProducto = {
+      id: Date.now(),
+      nombre: datosForm.nombre,
+      precio: datosForm.precio,
+      imagen: datosForm.imagen
+    };
+
+    agregarProducto(nuevoProducto);
+
+    setDatosForm({
+      nombre: "",
+      precio: "",
+      imagen: ""
+    });
+  };
 
   return (
     <FormularioProducto
@@ -31,7 +46,7 @@ function FormularioContainer() {
       manejarCambio={manejarCambio}
       manejarEnvio={manejarEnvio}
     />
-  )
+  );
 }
 
-export default FormularioContainer
+export default FormularioContainer;
